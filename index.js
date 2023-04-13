@@ -15,10 +15,11 @@ var mysqlConnection = mysql.createConnection({
 });
 
 mysqlConnection.connect((err)=>{
-    if(!err)
-    console.log('DB Connection Success!');
-    else
-    console.log('DB Connection Falied! \n Error :' + JSON.stringify(err, undefined, 2));
+    if(!err){
+        console.log('DB Connection Success!');
+    }else{
+        console.log('DB Connection Falied! \n Error :' + JSON.stringify(err, undefined, 2));
+    }
 });
 
 
@@ -29,10 +30,11 @@ app.listen(3000, ()=>console.log('Server Running'));
 //Get All data
 app.get('/Users', (req,res)=>{
     mysqlConnection.query('SELECT * FROM test', (err, rows, fields)=>{
-        if(!err)
-        res.send(rows);
-        else
-        console.log(err);
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
     });
 });
 
@@ -40,10 +42,11 @@ app.get('/Users', (req,res)=>{
 //Get 1 data
 app.get('/Users/:id', (req,res)=>{
     mysqlConnection.query('SELECT * FROM test WHERE id = ?', [req.params.id], (err, rows, fields)=>{
-        if(!err)
-        res.send(rows);
-        else
-        console.log(err);
+        if(!err){
+         res.send(rows);
+        }else{
+            console.log(err);
+        }
     });
 });
 
@@ -51,10 +54,11 @@ app.get('/Users/:id', (req,res)=>{
 //Delete 1 data
 app.delete('/Users/:id', (req,res)=>{
     mysqlConnection.query('DELETE FROM test WHERE id = ?', [req.params.id], (err, rows, fields)=>{
-        if(!err)
-        res.send('Deleted Success');
-        else
-        console.log(err);
+        if(!err){
+            res.send('Deleted Success');
+        }else{
+            console.log(err);
+        }
     });
 });
 
@@ -65,10 +69,11 @@ app.post('/Users', (req,res)=>{
     const EmailAdd = req.body.EmailAdd;
     
     mysqlConnection.query('INSERT INTO test (UserName, EmailAdd) VALUES (?,?)', [UserName, EmailAdd], (err, rows, fields)=>{
-        if(!err)
-        res.send('Insert Success');
-        else
-        console.log(err);
+        if(!err){
+            res.send('Insert Success');
+        }else{
+            console.log(err);
+        }
     });
 });
 
@@ -79,9 +84,10 @@ app.put('/Users', (req,res)=>{
     const EmailAdd = req.body.EmailAdd;
     
     mysqlConnection.query('UPDATE test SET EmailAdd = ? WHERE UserName = ?', [EmailAdd, UserName], (err, rows, fields)=>{
-        if(!err)
-        res.send('updated Success');
-        else
-        console.log(err);
+        if(!err){
+            res.send('updated Success');
+        }else{
+            console.log(err);
+        }
     });
 });
